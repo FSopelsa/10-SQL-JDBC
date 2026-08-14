@@ -1,0 +1,18 @@
+# IntelliJ IDEA and generated project output
+.idea/
+*.iml
+out/
+
+# Java build output
+target/
+build/
+*.class
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Operating-system files
+.DS_Store
+Thumbs.db

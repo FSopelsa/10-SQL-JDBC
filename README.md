@@ -48,3 +48,14 @@ Contains practice tasks based on the presentations:
 The repository currently contains documentation and exercises only. It does not contain Java source code, SQL script files, or a Maven/Gradle build configuration.
 
 The `.idea/` directory contains local IntelliJ IDEA project metadata: the Java module definition, project JDK/output settings, module registration, and Git integration settings. These files configure the editor and are not part of the learning material.
+
+## Preparation for implementation
+
+The repository includes an empty structure for the next phase:
+
+- `src/main/java/`: application and JDBC code.
+- `src/main/resources/`: configuration and other runtime resources.
+- `src/test/java/`: automated tests.
+- `sql/`: database setup, seed, or migration scripts.
+
+Before adding the application, choose the database, Java version, build tool, and JDBC driver. Keep usernames, passwords, and other local connection settings out of Git; use environment variables or another local configuration file instead.
