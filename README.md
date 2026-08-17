@@ -45,7 +45,7 @@ Contains practice tasks based on the presentations:
 
 ## Project status
 
-The repository currently contains documentation and exercises only. It does not contain Java source code, SQL script files, or a Maven/Gradle build configuration.
+Exercises 1-3 have been implemented as MySQL scripts in `sql/`. The repository does not yet contain Java source code or a Maven/Gradle build configuration.
 
 The `.idea/` directory contains local IntelliJ IDEA project metadata: the Java module definition, project JDK/output settings, module registration, and Git integration settings. These files configure the editor and are not part of the learning material.
 
@@ -58,4 +58,38 @@ The repository includes an empty structure for the next phase:
 - `src/test/java/`: automated tests.
 - `sql/`: database setup, seed, or migration scripts.
 
-Before adding the application, choose the database, Java version, build tool, and JDBC driver. Keep usernames, passwords, and other local connection settings out of Git; use environment variables or another local configuration file instead.
+Before adding a Java application, choose the Java version, build tool, and JDBC driver. Keep usernames, passwords, and other local connection settings out of Git; use environment variables or another local configuration file instead.
+
+## Running SQL exercises 1-3
+
+The exercise solution uses MySQL 8.4 in Docker, following the recommended Docker approach in `Database_Setup_Guide.md`. The password in `compose-mysql.yml` is the guide's local development password and must not be used in production.
+
+Start MySQL:
+
+```powershell
+docker compose -f compose-mysql.yml up -d
+```
+
+Wait until the container is healthy, then run all solution scripts:
+
+```powershell
+docker compose -f compose-mysql.yml exec -T mysql mysql -uroot -proot --table -e "source /workspace/sql/run_exercises_1_3.sql"
+```
+
+The command recreates the exercise tables, inserts the sample data, applies the requested update and deletion, and prints the Exercise 3 query results. It also prints the final `courses` table so the DML changes can be checked.
+
+The SQL files map to the assignment as follows:
+
+- `sql/01_exercise_1_ddl.sql`: creates `school_management` and `courses`.
+- `sql/02_exercise_2_dml.sql`: inserts, updates, and deletes course data.
+- `sql/03_exercise_3_student_setup.sql`: creates and seeds the lecture-compatible `student` table required by Exercise 3.
+- `sql/04_exercise_3_dql.sql`: contains the three requested `SELECT` queries.
+- `sql/run_exercises_1_3.sql`: runs everything in order and displays the final course data.
+
+Stop the database when finished:
+
+```powershell
+docker compose -f compose-mysql.yml down
+```
+
+The named Docker volume keeps the database data between starts. Add `-v` to the `down` command only if you intentionally want to remove that exercise data.
