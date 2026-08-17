@@ -67,13 +67,13 @@ The exercise solution uses MySQL 8.4 in Docker, following the recommended Docker
 Start MySQL:
 
 ```powershell
-docker compose -f compose-mysql.yml up -d
+docker compose -f compose-mysql.yml up -d --wait
 ```
 
-Wait until the container is healthy, then run all solution scripts:
+Run all solution scripts after the container reports that it is healthy:
 
 ```powershell
-docker compose -f compose-mysql.yml exec -T mysql mysql -uroot -proot --table -e "source /workspace/sql/run_exercises_1_3.sql"
+docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot --table -e "source /workspace/sql/run_exercises_1_3.sql"
 ```
 
 The command recreates the exercise tables, inserts the sample data, applies the requested update and deletion, and prints the Exercise 3 query results. It also prints the final `courses` table so the DML changes can be checked.
