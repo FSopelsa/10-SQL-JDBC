@@ -2,6 +2,8 @@ USE school_management;
 
 -- Exercise 3 assumes that the student table from the lecture exists.
 -- This setup recreates that table and adds data for testing the queries.
+-- Remove the dependent Exercise 4 table first when rerunning all exercises.
+DROP TABLE IF EXISTS attendance;
 DROP TABLE IF EXISTS student;
 
 CREATE TABLE student
