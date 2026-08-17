@@ -8,7 +8,7 @@ CREATE TABLE attendance
     id              INT                         NOT NULL AUTO_INCREMENT PRIMARY KEY,
     student_id      INT                         NOT NULL,
     attendance_date DATE                        NOT NULL DEFAULT (CURRENT_DATE),
-    status          ENUM ('Present', 'Absent') NOT NULL,
+    status          ENUM('Present', 'Absent') NOT NULL,
 
     FOREIGN KEY (student_id) REFERENCES student (id),
     UNIQUE (student_id, attendance_date)
@@ -17,6 +17,9 @@ CREATE TABLE attendance
 -- Sara intentionally has no attendance row so the LEFT JOIN can include her.
 INSERT INTO attendance (student_id, attendance_date, status)
 VALUES (1, '2026-08-11', 'Present'),
+       (1, '2026-08-12', 'Present'),
        (2, '2026-08-11', 'Absent'),
+       (2, '2026-08-12', 'Present'),
        (3, '2026-08-11', 'Present'),
+       (3, '2026-08-12', 'Absent'),
        (4, '2026-08-11', 'Absent');

@@ -1,6 +1,6 @@
 # 10-SQL-JDBC
 
-A learning project for relational databases, SQL, and Java Database Connectivity (JDBC). Exercises 1-4 from `SQL_Exercises.md` are implemented as repeatable MySQL scripts. Docker Compose starts the database, mounts the scripts, and provides a consistent environment for running and checking each exercise.
+A learning project for relational databases, SQL, and Java Database Connectivity (JDBC). All five exercises from `SQL_Exercises.md` are implemented as repeatable MySQL scripts. Docker Compose starts the database, mounts the scripts, and provides a consistent environment for running and checking each exercise.
 
 The repository currently focuses on SQL. It does not yet contain a Java/JDBC application or a Maven/Gradle build.
 
@@ -23,8 +23,9 @@ The repository currently focuses on SQL. It does not yet contain a Java/JDBC app
 | 2: DML | `02_exercise_2_dml.sql` | Inserts courses, updates Java credits, and deletes a course by ID. |
 | 3: DQL | `03_exercise_3_student_setup.sql`, `04_exercise_3_dql.sql` | Creates sample students and runs select, filter, and pattern-matching queries. |
 | 4: Joins | `05_exercise_4_attendance_setup.sql`, `06_exercise_4_joins.sql` | Creates attendance data and demonstrates inner and left joins. |
+| 5: Aggregation | `07_exercise_5_aggregation.sql` | Counts students, groups attendance statuses, and calculates present days per student. |
 
-`run_exercises_1_3.sql` runs Exercises 1-3. `run_exercises_1_4.sql` runs the complete implemented solution.
+`run_exercises_1_5.sql` runs the complete solution in assignment order.
 
 ## Requirements
 
@@ -46,15 +47,16 @@ Docker reports `Healthy` when MySQL is ready.
 ## Test all implemented exercises
 
 ```powershell
-docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot --table -e "source /workspace/sql/run_exercises_1_4.sql"
+docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot --table -e "source /workspace/sql/run_exercises_1_5.sql"
 ```
 
 Expected final results:
 
 - `courses` contains `Java Programming` with 6 credits and `SQL Basics` with 3 credits.
 - The Exercise 3 filters return three `G1` students and two names beginning with `J`.
-- The Exercise 4 inner join returns four students with attendance.
-- The Exercise 4 left join returns all five students, with `NULL` attendance for Sara.
+- The Exercise 4 inner join returns seven attendance records for four students; the left join also includes Sara with `NULL` attendance.
+- Exercise 5 reports 5 students, 4 `Present` records, and 3 `Absent` records.
+- Present-day totals are Alice 2, Bob 1, Julia 1, Jonas 0, and Sara 0.
 
 ## Test one exercise stage
 
@@ -82,6 +84,12 @@ docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot
 
 ```powershell
 docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot --table -e "source /workspace/sql/01_exercise_1_ddl.sql; source /workspace/sql/03_exercise_3_student_setup.sql; source /workspace/sql/05_exercise_4_attendance_setup.sql; source /workspace/sql/06_exercise_4_joins.sql;"
+```
+
+### Exercise 5: aggregation and grouping
+
+```powershell
+docker compose -f compose-mysql.yml exec -T -e MYSQL_PWD=root mysql mysql -uroot --table -e "source /workspace/sql/01_exercise_1_ddl.sql; source /workspace/sql/03_exercise_3_student_setup.sql; source /workspace/sql/05_exercise_4_attendance_setup.sql; source /workspace/sql/07_exercise_5_aggregation.sql;"
 ```
 
 ## Stop or reset MySQL
