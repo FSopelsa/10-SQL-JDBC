@@ -2,7 +2,7 @@
 
 A learning project for relational databases, SQL, and Java Database Connectivity (JDBC). All five exercises from `SQL_Exercises.md` are implemented as repeatable MySQL scripts. Docker Compose starts the database, mounts the scripts, and provides a consistent environment for running and checking each exercise.
 
-The repository currently focuses on SQL. It does not yet contain a Java/JDBC application or a Maven/Gradle build.
+The main exercise solution focuses on SQL. An imported Java/JDBC reference application is isolated in `external-jdbc-student-attendance-demo/` and is not part of the exercise runner.
 
 ## Project structure
 
@@ -14,6 +14,7 @@ The repository currently focuses on SQL. It does not yet contain a Java/JDBC app
 | `Database_Setup_Guide.md` | MySQL and PostgreSQL setup alternatives. |
 | `compose-mysql.yml` | Local MySQL 8.4 container and persistent data volume. |
 | `sql/` | Exercise setup, solution, and runner scripts. |
+| `external-jdbc-student-attendance-demo/` | Imported Maven/JDBC reference project with its own README and runtime assumptions. |
 
 ### Implemented exercises
 
